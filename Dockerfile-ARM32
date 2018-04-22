@@ -1,10 +1,10 @@
-FROM resin/raspberry-pi-alpine-node:9-slim
+FROM arm32v7/node:9-slim
 
 WORKDIR /app
 COPY . ./
 RUN npm install
 
-FROM resin/raspberry-pi-alpine-node:9-slim
+FROM arm32v7/node:9-slim
 
 COPY --from=build /app /
 EXPOSE 8000
