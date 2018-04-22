@@ -16,7 +16,6 @@ utilisant ici le bouchon DINSIC en exemple ! ...
 Pour tester le service DINSIC d'exemple : **247095301100810** en compte et
 **123** en mot de passe
 
-Exemple : ``` docker run -d -p 8000:8000 mcas/franceconnect-agent-demo:latest  ```
 
 ![][2]
 
