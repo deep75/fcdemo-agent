@@ -1,0 +1,3 @@
+FROM stefanscherer/node-windows:9-nanoserver
+EXPOSE 8000
+CMD [ "node", "app.js" ]
