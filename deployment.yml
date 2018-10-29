@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fcdemo-agent-app
-        image: mcas/franceconnect-agent-demo:master
+        image: mcas/franceconnect-agent-demo:latest
         ports:
         - containerPort: 8000
 ---
