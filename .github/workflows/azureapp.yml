@@ -28,8 +28,7 @@ jobs:
     - uses: azure/appservice-actions/webapp-container@master
       with:
         app-name: 'fcagentdemo'
-        images: 'mcas75.azurecr.io/franceconnect-agent-demo:latest    
-    
+        images: 'mcas75.azurecr.io/franceconnect-agent-demo:latest
     - uses: 8398a7/action-slack@v1
       with:
         type: failure
