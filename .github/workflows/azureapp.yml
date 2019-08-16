@@ -10,12 +10,6 @@ jobs:
     steps:
 
     - uses: actions/checkout@master
-    
-    - uses: 8398a7/action-slack@v1
-      with:
-        type: auto
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         
     - uses: azure/actions/login@master
       with:
@@ -35,3 +29,9 @@ jobs:
       with:
         app-name: 'fcagentdemo'
         images: 'mcas75.azurecr.io/franceconnect-agent-demo:latest
+
+    - uses: 8398a7/action-slack@v1
+      with:
+        type: auto
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
