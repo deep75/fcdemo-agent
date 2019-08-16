@@ -1,0 +1,31 @@
+on: [push]
+
+name: Node.js
+
+jobs:
+
+  build-and-deploy:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@master
+    
+    - uses: azure/actions/login@master
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/k8s-actions/docker-login@master
+      with:
+        login-server: mcas75.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - run: |
+        docker build . -t mcas75.azurecr.io/franceconnect-agent-demo:${{ github.sha }}
+        docker push mcas75.azurecr.io/franceconnect-agent-demo:${{ github.sha }} 
+      
+    - uses: azure/appservice-actions/webapp-container@master
+      with:
+        app-name: 'fcagentdemo'
+        images: 'mcas75.azurecr.io/franceconnect-agent-demo:${{ github.sha }}'
