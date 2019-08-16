@@ -3,6 +3,7 @@ FROM node:12-alpine as build
 WORKDIR /app
 COPY . ./
 RUN npm install
+RUN npm audit fix --force
 
 FROM node:12-alpine
 
