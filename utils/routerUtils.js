@@ -27,7 +27,7 @@ const getAuthRoute = params =>
   + `&scope=${encodeURIComponent(params.scope)}&state=${params.state}&nonce=${params.nonce}`;
 
 /**
-* request on token url with customAxios to prevent self signed error
+* request on token url with the configured axios instance
 * @param  {Object} params
 * @param  {String} code   [code retrieved with authorize]
 * @param  {Object} axios
@@ -53,7 +53,7 @@ const requestTokenWithCode = (params, code, axios) => {
 };
 
   /**
-  * get userInfo with axios to prevent self signed error
+  * get userInfo with the configured axios instance
   * @param  {Object} params
   * @param  {String} access_token
   * @param  {Object} axios
@@ -69,7 +69,7 @@ const requestUserInfo = (params, accessToken, axios) => {
   return axios.get(`${params.userInfoURL}?schema=openid`,
     { headers: { Authorization: `Bearer ${accessToken}` } })
     .catch((err) => {
-      Promise.reject(new Error(getErrorFromAxiosRes(err)));
+      return Promise.reject(new Error(getErrorFromAxiosRes(err)));
     });
 };
 
