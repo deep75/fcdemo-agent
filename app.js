@@ -1,17 +1,23 @@
 
-const axios = require('axios');
+const axiosModule = require('axios');
 const express = require('express');
 const https = require('https');
 const configFCA = require('./config/configFCA.json');
 // const configFCP = require('./config/configFCP.json');
 
 const initExpressApp = require('./utils/expressUtils').initExpressApp;
+const axios = axiosModule.default || axiosModule;
+const allowSelfSignedCerts = process.env.ALLOW_SELF_SIGNED_CERTS === 'true';
 
 const app = express();
+// Only allow self-signed certificates when explicitly enabled for local/dev usage.
+// Production should leave ALLOW_SELF_SIGNED_CERTS unset or set it to false.
 const customAxios = axios.create({
-  httpsAgent: new https.Agent({
-    rejectUnauthorized: false,
-  })
+  httpsAgent: new https.Agent(
+    allowSelfSignedCerts
+      ? { rejectUnauthorized: false }
+      : {},
+  ),
 });
 
 // initExpressApp(app, configFCP, customAxios, __dirname);
